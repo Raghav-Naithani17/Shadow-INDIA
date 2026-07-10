@@ -1,19 +1,14 @@
-import ReportForm from "./components/ReportForm";
-import Reports from "./components/Reports";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Stats from "./components/Stats";
-import Features from "./components/Features";
+import { Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Admin from "./pages/Admin";
+
 function App() {
   return (
-    <div className="bg-slate-950 min-h-screen">
-      <Navbar />
-      <Hero />
-      <Features />
-      <Stats />
-      <ReportForm />
-      <Reports />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/admin" element={<Admin />} />
+    </Routes>
   );
 }
 
