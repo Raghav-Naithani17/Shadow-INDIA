@@ -9,8 +9,8 @@ function App() {
     <div className="bg-slate-950 min-h-screen">
       <Navbar />
       <Hero />
-      <Stats />
       <Features />
+      <Stats />
       <ReportForm />
       <Reports />
     </div>

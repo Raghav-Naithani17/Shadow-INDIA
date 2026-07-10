@@ -50,6 +50,42 @@ const getReports = async (req, res) => {
     });
   }
 };
+// Dashboard Stats
+const getStats = async (req, res) => {
+  try {
+    const total = await Report.countDocuments();
+
+    const pending = await Report.countDocuments({
+      status: "Pending",
+    });
+
+    const inProgress = await Report.countDocuments({
+      status: "In Progress",
+    });
+
+    const resolved = await Report.countDocuments({
+      status: "Resolved",
+    });
+
+    res.status(200).json({
+      success: true,
+      data: {
+        total,
+        pending,
+        inProgress,
+        resolved,
+      },
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+
+  }
+};
 // Get Single Report
 const getReportById = async (req, res) => {
   try {
@@ -131,6 +167,7 @@ const deleteReport = async (req, res) => {
 module.exports = {
   createReport,
   getReports,
+  getStats,
   getReportById,
   updateReport,
   deleteReport,
