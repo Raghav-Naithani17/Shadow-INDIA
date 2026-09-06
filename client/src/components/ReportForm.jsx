@@ -1,6 +1,6 @@
 import { useState } from "react";
 import API from "../services/api";
-
+import toast from "react-hot-toast";
 function ReportForm() {
   const [formData, setFormData] = useState({
     title: "",
@@ -43,7 +43,7 @@ function ReportForm() {
 
       console.log(res.data);
 
-      alert("Report Submitted Successfully!");
+      toast.success("Report Submitted Successfully!");
 
       setFormData({
         title: "",
@@ -60,7 +60,7 @@ function ReportForm() {
   console.log("Response:", error.response);
   console.log("Data:", error.response?.data);
 
-  alert("Something went wrong");
+  toast.error("Something went wrong!");
 }
   };
 

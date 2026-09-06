@@ -1,31 +1,64 @@
+import { Link } from "react-router-dom";
+
 function Navbar() {
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
-    <nav className="w-full h-20 bg-slate-950 border-b border-slate-800">
+    <nav className="w-full h-20 bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto h-full flex items-center justify-between px-8">
 
-        <h1 className="text-3xl font-bold text-cyan-400 whitespace-nowrap">
-           Shadow India
-        </h1>
+        {/* Logo */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="text-3xl font-bold text-cyan-400 whitespace-nowrap"
+        >
+          Shadow India
+        </button>
 
+        {/* Navigation */}
         <div className="flex items-center gap-8 text-white">
 
-          <a href="#" className="hover:text-cyan-400 transition">
+          <button
+            onClick={() =>
+              window.scrollTo({ top: 0, behavior: "smooth" })
+            }
+            className="hover:text-cyan-400 transition"
+          >
             Home
-          </a>
-
-          <a href="#" className="hover:text-cyan-400 transition">
-            Features
-          </a>
-
-          <a href="#" className="hover:text-cyan-400 transition">
-            About
-          </a>
-
-          <a href="#" className="hover:text-cyan-400 transition">
-            Contact
-          </a>
+          </button>
 
           <button
+            onClick={() => scrollToSection("features")}
+            className="hover:text-cyan-400 transition"
+          >
+            Features
+          </button>
+
+          <button
+            onClick={() => scrollToSection("about")}
+            className="hover:text-cyan-400 transition"
+          >
+            About
+          </button>
+
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="hover:text-cyan-400 transition"
+          >
+            Contact
+          </button>
+
+          <Link
+            to="/login"
             className="
               bg-cyan-500
               hover:bg-cyan-600
@@ -37,7 +70,7 @@ function Navbar() {
             "
           >
             Login
-          </button>
+          </Link>
 
         </div>
 

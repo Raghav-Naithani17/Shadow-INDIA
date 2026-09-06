@@ -21,6 +21,15 @@ const reportSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    latitude: {
+  type: Number,
+  default: null,
+    },
+
+longitude: {
+  type: Number,
+  default: null,
+},
 
     image: {
       type: String,

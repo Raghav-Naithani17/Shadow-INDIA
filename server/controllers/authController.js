@@ -59,15 +59,15 @@ const loginAdmin = async (req, res) => {
       });
     }
 
-    const token = jwt.sign(
-      {
-        id: admin._id,
-      },
-      process.env.JWT_SECRET || "shadowindiajwt",
-      {
-        expiresIn: "7d",
-      }
-    );
+const token = jwt.sign(
+  {
+    id: admin._id,
+  },
+  process.env.JWT_SECRET,
+  {
+    expiresIn: "7d",
+  }
+);
 
     res.status(200).json({
       success: true,

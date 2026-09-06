@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
 
@@ -25,12 +26,12 @@ function Login() {
 
       localStorage.setItem("token", res.data.token);
 
-      alert("Login Successful");
+      toast.success("Login Successful");
 
       navigate("/admin");
 
     } catch (err) {
-      alert("Invalid Credentials");
+      toast.error("Invalid Credentials");
     }
   };
 

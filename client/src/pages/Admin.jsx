@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
+import toast from "react-hot-toast";
 
 function Admin() {
   const [reports, setReports] = useState([]);
+  const [stats, setStats] = useState({
+  total: 0,
+  pending: 0,
+  inProgress: 0,
+  resolved: 0,
+});
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
 
   useEffect(() => {
     fetchReports();
+    fetchStats();
   }, []);
 
   const fetchReports = async () => {
@@ -18,6 +26,14 @@ function Admin() {
       console.log(error);
     }
   };
+  const fetchStats = async () => {
+  try {
+    const res = await API.get("/reports/stats");
+    setStats(res.data.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   const updateStatus = async (id, status) => {
     try {
@@ -34,6 +50,8 @@ function Admin() {
       );
 
       fetchReports();
+      fetchStats();
+      toast.success("Status Updated");
     } catch (error) {
       console.log(error);
     }
@@ -56,6 +74,8 @@ function Admin() {
       });
 
       fetchReports();
+      fetchStats();
+      toast.success("Report Deleted");
     } catch (error) {
       console.log(error);
     }
@@ -68,6 +88,49 @@ function Admin() {
         <h2 className="text-4xl font-bold text-white mb-8">
           Admin Dashboard
         </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+
+  <div className="bg-slate-800 p-6 rounded-xl shadow-lg">
+    <h3 className="text-slate-400 text-lg">
+      📄 Total Reports
+    </h3>
+
+    <p className="text-4xl font-bold text-white mt-3">
+      {stats.total}
+    </p>
+  </div>
+
+  <div className="bg-yellow-500 p-6 rounded-xl shadow-lg">
+    <h3 className="text-white text-lg">
+      🟡 Pending
+    </h3>
+
+    <p className="text-4xl font-bold text-white mt-3">
+      {stats.pending}
+    </p>
+  </div>
+
+  <div className="bg-blue-500 p-6 rounded-xl shadow-lg">
+    <h3 className="text-white text-lg">
+      🔵 In Progress
+    </h3>
+
+    <p className="text-4xl font-bold text-white mt-3">
+      {stats.inProgress}
+    </p>
+  </div>
+
+  <div className="bg-green-500 p-6 rounded-xl shadow-lg">
+    <h3 className="text-white text-lg">
+      🟢 Resolved
+    </h3>
+
+    <p className="text-4xl font-bold text-white mt-3">
+      {stats.resolved}
+    </p>
+  </div>
+
+</div>
 
         {/* Search Bar */}
 
